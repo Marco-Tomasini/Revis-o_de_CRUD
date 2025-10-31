@@ -28,7 +28,7 @@
                                 <a class="nav-link" href="cadastro_usuario.php">Cadastro Usuário</a>
                             </li>
                             <li class="nav-item ms-5">
-                                <a class="nav-link" href="cadastro_tarefa.php?id_tarefa">Cadastro Tarefa</a>
+                                <a class="nav-link" href="cadastro_tarefa.php">Cadastro Tarefa</a>
                             </li>
                             <li class="nav-item ms-5">
                                 <a class="nav-link" href="../index.php">Visualizar Tarefas</a>
