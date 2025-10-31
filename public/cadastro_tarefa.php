@@ -3,6 +3,12 @@
 include 'db_connect.php';
 include 'partials/header.php';
 
+if($_SERVER['REQUEST_METHOD'] == 'GET'){
+
+$id_tarefa = $_GET['id'];
+}
+
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $id_usuario_fk = $_POST['id_usuario'];
     $descricao_tarefa = $_POST['descricao_tarefa'];
@@ -13,7 +19,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $sql = "INSERT INTO tarefas (id_usuario, descricao_tarefa, nome_setor, prioridade, status) VALUES ('$id_usuario_fk', '$descricao_tarefa', '$nome_setor', '$prioridade', '$status')";
 
     if($conn->query($sql) === true) {
-        echo "Tarefa cadastrada com sucesso.";
+        echo "<script>alert('Tarefa cadastrada com sucesso.');</script>";
+        header('Location: ../index.php');
+        exit();
     } else {
         echo "Erro " . $sql . '<br>' . $conn->error;
     }
@@ -64,9 +72,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         <label class="form-label mt-3" for="status">Status: </label>
         <select name="status" class="form-select" required>
-            <option value="pendente">Pendente</option>
-            <option value="em_andamento">Em Andamento</option>
-            <option value="concluida">Concluída</option>
+            <option value="A fazer">A fazer</option>
+            <option value="Fazendo">Fazendo</option>
+            <option value="Pronto">Pronto</option>
         </select>
 
         <input type="submit" class="btn btn-primary mt-4" value="Cadastrar Tarefa">
