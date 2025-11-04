@@ -32,6 +32,10 @@
                             </li>
                             <li class="nav-item ms-5">
                                 <a class="nav-link" href="index.php">Visualizar Tarefas</a>
+                            </li>
+                            <li class="nav-item ms-5" >
+                                <a class="nav-link" href="public/noticias.php">Notícias do Espaço</a>
+                            </li>
                             <li class="nav-item ms-5">
                                 <a class="nav-link" href="public/login.php?logout=1">Logout</a>
                             </li>
