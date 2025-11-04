@@ -2,7 +2,12 @@
 
 include 'public/db_connect.php';
 include 'public/partials/header_index.php';
+session_start();
 
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: public/login.php');
+    exit();
+}
 ?>
 
 
@@ -24,8 +29,8 @@ include 'public/partials/header_index.php';
                 <div class="ms-4 me-4 col justify-content-center align-items-center bg-fazer">
                     <h2 class="mt-3 text-center">A Fazer</h2>
                     <?php
-                    $sql = "SELECT * FROM tarefas INNER JOIN usuario ON tarefas.id_usuario = usuario.id_usuario WHERE status = 'A fazer'";
-                    $result = $conn->query($sql);
+                    $sql = "SELECT * FROM tarefas INNER JOIN usuario ON tarefas.id_usuario = usuario.id_usuario WHERE status = 'A fazer' AND tarefas.id_usuario = {$_SESSION['id_usuario']}";
+                    $result = $mysqli->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "
@@ -61,7 +66,7 @@ include 'public/partials/header_index.php';
                     <h2 class="mt-3 text-center">Fazendo</h2>
                     <?php
                     $sql = "SELECT * FROM tarefas INNER JOIN usuario ON tarefas.id_usuario = usuario.id_usuario WHERE status = 'Fazendo'";
-                    $result = $conn->query($sql);
+                    $result = $mysqli->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                     
@@ -97,7 +102,7 @@ include 'public/partials/header_index.php';
                     <h2 class="mt-3 text-center">Pronto</h2>
                     <?php
                     $sql = "SELECT * FROM tarefas INNER JOIN usuario ON tarefas.id_usuario = usuario.id_usuario WHERE status = 'Pronto'";
-                    $result = $conn->query($sql);
+                    $result = $mysqli->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "
@@ -123,7 +128,7 @@ include 'public/partials/header_index.php';
                             ";
                         }
                     }
-                    $conn->close();
+                    $mysqli->close();
                     ?>
                 </div>
             </div>

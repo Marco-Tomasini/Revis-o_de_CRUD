@@ -19,15 +19,18 @@ CREATE TABLE tarefas
  status ENUM('A Fazer', 'Fazendo', 'Pronto') NOT NULL
 );
 
-
+ALTER TABLE usuario
+ADD COLUMN senha VARCHAR(255) NOT NULL;
 
 -- Inserindo usuários
-INSERT INTO usuario (nome, email) VALUES
-('Marco Antonio Tomasini', 'marco_tomasini@estudante.sesisenai.org.br'),
-('Ana Beatriz Costa', 'ana.costa@sesi.com'),
-('João Pedro Almeida', 'joao.almeida@senai.com'),
-('Larissa Ferreira', 'larissa.ferreira@sesi.com'),
-('Carlos Eduardo Silva', 'carlos.silva@senai.com');
+INSERT INTO usuario (nome, email, senha) VALUES
+('Marco Antonio Tomasini', 'marco_tomasini@estudante.sesisenai.org.br', '123'),
+('Ana Beatriz Costa', 'ana.costa@sesi.com', '123'),
+('João Pedro Almeida', 'joao.almeida@senai.com', '123'),
+('Larissa Ferreira', 'larissa.ferreira@sesi.com', '123'),
+('Carlos Eduardo Silva', 'carlos.silva@senai.com', '123');
+
+
 
 -- Inserindo tarefas
 INSERT INTO tarefas (id_usuario, descricao_tarefa, nome_setor, prioridade, status) VALUES

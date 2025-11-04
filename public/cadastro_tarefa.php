@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     $id_tarefa = $_GET['id'];
 
     $sql2 = "SELECT * FROM tarefas INNER JOIN usuario ON tarefas.id_usuario = usuario.id_usuario WHERE id_tarefa='$id_tarefa'";
-    $result = $conn->query($sql2);
+    $result = $mysqli->query($sql2);
     $tarefa_row = $result->fetch_assoc();
     
     $id_usuario_fk = $tarefa_row['id_usuario'];
@@ -25,15 +25,22 @@ if (isset($_GET['id'])) {
 
         $sql = "UPDATE tarefas SET id_usuario='$id_usuario_fk', descricao_tarefa='$descricao_tarefa', nome_setor='$nome_setor', prioridade='$prioridade', status='$status' WHERE id_tarefa='$id_tarefa'";
 
-        if($conn->query($sql) === true) {
+        if($mysqli->query($sql) === true) {
             echo "<script>alert('Tarefa Atualizada com sucesso.');</script>";
             header('Location: ../index.php');
             exit();
         } else {
-            echo "Erro " . $sql . '<br>' . $conn->error;
+            echo "Erro " . $sql . '<br>' . $mysqli->error;
         }
-        $conn->close();
+        $mysqli->close();
     }
+
+session_start();
+
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: public/login.php');
+    exit();
+}
 ?>
 
     <html lang="en">
@@ -54,7 +61,7 @@ if (isset($_GET['id'])) {
             <select name="id_usuario" class="form-select mb-3" required >
                 <?php
                     $sql = "SELECT id_usuario, nome FROM usuario";
-                    $result = $conn->query($sql);
+                    $result = $mysqli->query($sql);
 
                     if ($result->num_rows > 0) {
                         while($usuario_row = $result->fetch_assoc()) {
@@ -105,14 +112,14 @@ if (isset($_GET['id'])) {
 
         $sql = "INSERT INTO tarefas (id_usuario, descricao_tarefa, nome_setor, prioridade, status) VALUES ('$id_usuario_fk', '$descricao_tarefa', '$nome_setor', '$prioridade', '$status')";
 
-        if($conn->query($sql) === true) {
+        if($mysqli->query($sql) === true) {
             echo "<script>alert('Tarefa cadastrada com sucesso.');</script>";
             header('Location: ../index.php');
             exit();
         } else {
-            echo "Erro " . $sql . '<br>' . $conn->error;
+            echo "Erro " . $sql . '<br>' . $mysqli->error;
         }
-        $conn->close();
+        $mysqli->close();
     }
     ?>
 
@@ -134,7 +141,7 @@ if (isset($_GET['id'])) {
             <select name="id_usuario" class="form-select mb-3" required>
                 <?php
                 $sql = "SELECT id_usuario, nome FROM usuario";
-                $result = $conn->query($sql);
+                $result = $mysqli->query($sql);
 
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {

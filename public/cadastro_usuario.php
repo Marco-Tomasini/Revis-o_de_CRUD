@@ -6,15 +6,23 @@ include 'partials/header.php';
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $nome = $_POST['nome'];
     $email = $_POST['email'];
+    $senha = $_POST['senha'];
 
-    $sql = "INSERT INTO usuario (nome,email) VALUES ('$nome','$email')";
+    $sql = "INSERT INTO usuario (nome,email,senha) VALUES ('$nome','$email','$senha')";
 
-    if($conn->query($sql) === true) {
+    if($mysqli->query($sql) === true) {
         echo "Usuário cadastrado com sucesso.";
     } else {
-        echo "Erro " . $sql . '<br>' . $conn->error;
+        echo "Erro " . $sql . '<br>' . $mysqli->error;
     }
-    $conn->close();
+    $mysqli->close();
+}
+
+session_start();
+
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: public/login.php');
+    exit();
 }
 ?>
 
@@ -36,6 +44,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <br><br>
         <label class="form-label" for="email">Email: </label>
         <input type="email" name="email" class="form-control" required>
+        <br><br>
+        <label class="form-label" for="senha">Senha: </label>
+        <input type="password" name="senha" class="form-control" required>
 
         <input type="submit" class="btn btn-primary mt-4" value="Cadastrar Usuário">
 

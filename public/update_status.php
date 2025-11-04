@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
 
     $sql = "UPDATE tarefas SET status = ? WHERE id_tarefa = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("si", $status, $id_tarefa);
 
     if ($stmt->execute()) {

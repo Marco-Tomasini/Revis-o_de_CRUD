@@ -5,11 +5,11 @@ $id = $_GET['id'];
 
 $sql = " DELETE FROM tarefas WHERE id_tarefa=$id ";
 
-if ($conn->query($sql) === true) {
+if ($mysqli->query($sql) === true) {
     header('Location: ../index.php');
     exit();
 } else {
-    echo "Erro " . $sql . '<br>' . $conn->error;
+    echo "Erro " . $sql . '<br>' . $mysqli->error;
 }
-$conn -> close();
+$mysqli->close();
 exit();

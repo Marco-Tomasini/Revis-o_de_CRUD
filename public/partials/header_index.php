@@ -32,6 +32,8 @@
                             </li>
                             <li class="nav-item ms-5">
                                 <a class="nav-link" href="index.php">Visualizar Tarefas</a>
+                            <li class="nav-item ms-5">
+                                <a class="nav-link" href="public/login.php?logout=1">Logout</a>
                             </li>
                         </ul>
                     </div>
