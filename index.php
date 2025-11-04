@@ -65,7 +65,7 @@ if (!isset($_SESSION['id_usuario'])) {
                 <div class="ms-4 me-4 col justify-content-center align-items-center bg-fazendo">
                     <h2 class="mt-3 text-center">Fazendo</h2>
                     <?php
-                    $sql = "SELECT * FROM tarefas INNER JOIN usuario ON tarefas.id_usuario = usuario.id_usuario WHERE status = 'Fazendo'";
+                    $sql = "SELECT * FROM tarefas INNER JOIN usuario ON tarefas.id_usuario = usuario.id_usuario WHERE status = 'Fazendo' AND tarefas.id_usuario = {$_SESSION['id_usuario']}";
                     $result = $mysqli->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -101,7 +101,7 @@ if (!isset($_SESSION['id_usuario'])) {
                 <div class="ms-4 me-4 col justify-content-center align-items-center bg-pronto">
                     <h2 class="mt-3 text-center">Pronto</h2>
                     <?php
-                    $sql = "SELECT * FROM tarefas INNER JOIN usuario ON tarefas.id_usuario = usuario.id_usuario WHERE status = 'Pronto'";
+                    $sql = "SELECT * FROM tarefas INNER JOIN usuario ON tarefas.id_usuario = usuario.id_usuario WHERE status = 'Pronto' AND tarefas.id_usuario = {$_SESSION['id_usuario']}";
                     $result = $mysqli->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
